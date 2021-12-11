@@ -18,8 +18,8 @@ def homepage():
 def upload_file():
     file = request.files['file']
     file_content = file.read()
-    file_path = getpath(file)
-    return file_path
+    file_name = file.filename
+    return file_name
 
 
 if __name__ == '__main__':
