@@ -1,17 +1,25 @@
-from flask import Flask
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
+
+from flask import Flask, request
 from waitress import serve
+from io import BufferedReader
+
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = '/temp_files/'
+app.config['MAX_CONTENT_PATH'] = 1024 * 1024
 
 @app.route('/')
 def homepage():
-    return 'asdasdasdasdasd'
+    return "hello"
 
 @app.route('/uploader', methods = ['POST'])
 def upload_file():
-      f = request.files['file']
-      o = f.read()
+      f = request.files['file'].read()
       
-      return str(o);
+      return str(f);
+
 
 if __name__ == '__main__':
     serve(app, host="0.0.0.0", port=8080)
