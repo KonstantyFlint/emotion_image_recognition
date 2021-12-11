@@ -5,9 +5,10 @@ from flask import Flask, request
 from waitress import serve
 from io import BufferedReader
 
+import file_converter
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = '/temp_files/'
+app.config['UPLOAD_FOLDER'] = 'temp_files'
 app.config['MAX_CONTENT_PATH'] = 1024 * 1024
 
 @app.route('/')
@@ -17,9 +18,10 @@ def homepage():
 @app.route('/uploader', methods = ['POST'])
 def upload_file():
     file = request.files['file']
-    file_content = file.read()
-    file_name = file.filename
-    return file_name
+    
+    arr = file_converter.file_to_numpy_array(app, file)
+    
+    return arr
 
 
 if __name__ == '__main__':
