@@ -16,9 +16,10 @@ def homepage():
 
 @app.route('/uploader', methods = ['POST'])
 def upload_file():
-      f = request.files['file'].read()
-      
-      return str(f);
+    file = request.files['file']
+    file_content = file.read()
+    file_path = getpath(file)
+    return file_path
 
 
 if __name__ == '__main__':
