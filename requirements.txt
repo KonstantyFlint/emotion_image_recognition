@@ -1,4 +1,4 @@
 Flask
 gunicorn
 waitress
-cv2
+opencv-python
