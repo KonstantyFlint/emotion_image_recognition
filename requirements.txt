@@ -2,3 +2,4 @@ Flask
 gunicorn
 waitress
 opencv-python-headless
+tensorflow
