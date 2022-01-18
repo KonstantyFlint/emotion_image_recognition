@@ -20,6 +20,7 @@ def process_image(image):
     else:
         cropped_image = gray_image
     final_image = cv2.resize(cropped_image, [48,48])
+    final_image = numpy.expand_dims(final_image, axis=0)
     return final_image
 
 def save_file(app, file):
@@ -32,3 +33,13 @@ def save_file(app, file):
     file_path = os.path.join(upload_folder, filename)
     file.save(file_path)
     return file_path
+
+def to_json(emotion_names, prediction_vals):
+    out = ""
+    for i in range(7):
+        out += '"' + emotion_names[i] + '": ' + str(prediction_vals[i])
+        if(i != 6):
+            out+= ", "
+    return "{" + out + "}"
+
+
